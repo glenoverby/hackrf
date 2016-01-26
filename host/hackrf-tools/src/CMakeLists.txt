@@ -38,6 +38,15 @@ install(TARGETS hackrf_si5351c RUNTIME DESTINATION ${INSTALL_DEFAULT_BINDIR})
 add_executable(hackrf_transfer hackrf_transfer.c)
 install(TARGETS hackrf_transfer RUNTIME DESTINATION ${INSTALL_DEFAULT_BINDIR})
 
+add_executable(hackrf_t hackrf_t.c)
+install(TARGETS hackrf_t RUNTIME DESTINATION ${INSTALL_DEFAULT_BINDIR})
+
+add_executable(hackrf_rxtx hackrf_rxtx.c)
+install(TARGETS hackrf_rxtx RUNTIME DESTINATION ${INSTALL_DEFAULT_BINDIR})
+
+add_executable(hackrf_jack hackrf_jack.c)
+install(TARGETS hackrf_jack RUNTIME DESTINATION ${INSTALL_DEFAULT_BINDIR})
+
 add_executable(hackrf_rffc5071 hackrf_rffc5071.c)
 install(TARGETS hackrf_rffc5071 RUNTIME DESTINATION ${INSTALL_DEFAULT_BINDIR})
 
@@ -49,9 +58,6 @@ install(TARGETS hackrf_cpldjtag RUNTIME DESTINATION ${INSTALL_DEFAULT_BINDIR})
 
 add_executable(hackrf_info hackrf_info.c)
 install(TARGETS hackrf_info RUNTIME DESTINATION ${INSTALL_DEFAULT_BINDIR})
-
-add_executable(hackrf_jack hackrf_jack.c)
-install(TARGETS hackrf_jack RUNTIME DESTINATION ${INSTALL_DEFAULT_BINDIR})
 
 if(NOT libhackrf_SOURCE_DIR)
 include_directories(${LIBHACKRF_INCLUDE_DIR})
@@ -68,8 +74,12 @@ endif()
 target_link_libraries(hackrf_max2837 ${TOOLS_LINK_LIBS})
 target_link_libraries(hackrf_si5351c ${TOOLS_LINK_LIBS})
 target_link_libraries(hackrf_transfer ${TOOLS_LINK_LIBS})
+target_link_libraries(hackrf_t ${TOOLS_LINK_LIBS})
+target_link_libraries(hackrf_rxtx ${TOOLS_LINK_LIBS})
+link_directories(/home/glen/build/libsamplerate-0.1.8/src)
+#target_link_libraries(hackrf_jack ${TOOLS_LINK_LIBS} jack /home/glen/build/libsamplerate-0.1.8/src/libsr.la)
+target_link_libraries(hackrf_jack ${TOOLS_LINK_LIBS} jack /home/glen/build/lib/libsamplerate.so /home/glen/build/lib/libfftw3.a)
 target_link_libraries(hackrf_rffc5071 ${TOOLS_LINK_LIBS})
 target_link_libraries(hackrf_spiflash ${TOOLS_LINK_LIBS})
 target_link_libraries(hackrf_cpldjtag ${TOOLS_LINK_LIBS})
 target_link_libraries(hackrf_info ${TOOLS_LINK_LIBS})
-target_link_libraries(hackrf_jack ${TOOLS_LINK_LIBS} jack samplerate pthread)
